@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { SearchBar } from "./SearchBar";
 import { LoadingIndicator } from "./LoadingIndicator";
 import { WeatherCard } from "./WeatherCard";
 import { WeatherData } from "@/types/climaTypes";
+
 import { getWeatherByCity } from "@/services/weatherService";
 
 export function WeatherDashboard() {
@@ -22,7 +24,11 @@ export function WeatherDashboard() {
             const data = await getWeatherByCity(city);
             setWeather(data);
         } catch (error) {
-            console.log(error);
+            toast.error(
+                error instanceof Error
+                    ? error.message
+                    : 'No se pudo completar la búsqueda.'
+            );
         } finally {
             setIsLoading(false);
         }
