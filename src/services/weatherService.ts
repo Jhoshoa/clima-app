@@ -11,7 +11,7 @@ export async function getWeatherByCity(city: string): Promise<WeatherData> {
 
     const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
     if (!apiKey) {
-        throw new Error("Falta configurar la clave de API de OpenWeatherMap.");
+        throw new Error("Falta configurar la API Key de OpenWeatherMap.");
     }
 
     try {
@@ -30,7 +30,7 @@ export async function getWeatherByCity(city: string): Promise<WeatherData> {
         return {
             city: data.name,
             country: data.sys.country,
-            temperature: data.main.temp,
+            temperature: Math.round(data.main.temp),
             humidity: data.main.humidity,
             description: data.weather[0].description,
         };
