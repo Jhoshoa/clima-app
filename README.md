@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ClimaApp
 
-## Getting Started
+Aplicación web para consultar el clima actual de una ciudad. Está desarrollada con **Next.js (App Router)**, **React**, **TypeScript** y **Axios**, y obtiene los datos de [OpenWeatherMap](https://openweathermap.org).
 
-First, run the development server:
+La búsqueda muestra la ciudad, el país, la temperatura en grados Celsius, la humedad y la descripción del clima. Las consultas se realizan en español y las temperaturas se muestran redondeadas.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Requisitos
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js **20.9.0 o superior** (requerido por Next.js 16).
+- npm.
+- Una API key de OpenWeatherMap.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Instalación y ejecución
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Desde la raíz del proyecto:
 
-## Learn More
+1. Instala las dependencias:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Crea el archivo local de variables de entorno a partir de la plantilla:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   cp .env.example .env.local
+   ```
 
-## Deploy on Vercel
+3. Abre `.env.local` y reemplaza el valor de ejemplo por tu API key:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```env
+   NEXT_PUBLIC_OPENWEATHER_API_KEY=tu_api_key
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Inicia el servidor de desarrollo:
+
+   ```bash
+   npm run dev
+   ```
+
+   Abre [http://localhost:3000](http://localhost:3000).
+
+No compartas ni subas `.env.local` al repositorio. **Importante:** por el prefijo `NEXT_PUBLIC_`, Next.js expone esta variable en el bundle del navegador; no se debe tratar como una credencial secreta. Usa una API key dedicada y aplica las restricciones disponibles en OpenWeatherMap.
+
+## Comandos disponibles
+
+| Comando | Descripción |
+| --- | --- |
+| `npm run dev` | Inicia el servidor de desarrollo. |
+| `npm run build` | Genera la compilación de producción. |
+| `npm start` | Sirve la compilación de producción (ejecutar después de `npm run build`). |
+| `npm run lint` | Ejecuta ESLint. |
+| `npm test` | Ejecuta las pruebas con Jest. |
+| `npm run test:coverage` | Ejecuta las pruebas y genera el reporte de cobertura. |
+
+Las pruebas usan **Jest** y **React Testing Library**. La configuración de cobertura establece un mínimo global del 80 % para ramas, funciones, líneas y sentencias dentro de los archivos incluidos en la configuración de Jest.
+
+## Estructura principal
+
+- `src/app/`: rutas y página principal de Next.js.
+- `src/components/clima/`: interfaz de búsqueda y presentación del clima.
+- `src/services/`: cliente HTTP y consulta a OpenWeatherMap.
+- `src/types/`: tipos de datos de la aplicación.
+- `__tests__/`: pruebas de componentes y servicios.
