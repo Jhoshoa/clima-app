@@ -62,3 +62,5 @@ Las pruebas usan **Jest** y **React Testing Library**. La configuración de cobe
 - `src/services/`: cliente HTTP y consulta a OpenWeatherMap.
 - `src/types/`: tipos de datos de la aplicación.
 - `__tests__/`: pruebas de componentes y servicios.
+
+![Captura de la app](./public/images/captura-app.png)
